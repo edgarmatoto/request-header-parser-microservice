@@ -1,5 +1,3 @@
-// index.js
-// where your node app starts
 
 // init project
 require('dotenv').config();
@@ -23,6 +21,19 @@ app.get('/', function (req, res) {
 app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
+
+// create response to /api/whoami endpoint
+app.get('/api/whoami', (req, res) => {
+  const ip = req.headers["host"];
+  const language = req.headers["accept-language"];
+  const software = req.headers["user-agent"];
+
+  res.json({
+    ipaddress: ip,
+    language: language,
+    software: software
+  });
+})
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
